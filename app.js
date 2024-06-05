@@ -10,8 +10,6 @@ const branchColor = "#A44753"
 let tree = [];
 let leaves = [];
 
-let count = 0;
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   let a = createVector(width / 2, height);
@@ -26,7 +24,7 @@ function setup() {
 function draw() {
     background(backgroundColor);
   
-    for (var i = 0; i < tree.length; i++) {
+    for (let i = 0; i < tree.length; i++) {
       tree[i].show();
     }
   
@@ -41,8 +39,6 @@ for (let index = 0; index < 6; index++) {
 
 function growTree() {
 
-    if (count > 5) { return; }
-
     for (let i = tree.length - 1; i >= 0; i--) {
         if (!tree[i].finished) {
           tree.push(tree[i].branchA());
@@ -50,8 +46,6 @@ function growTree() {
         }
         tree[i].finished = true;
     }
-
-    count++;
 }
 
 
@@ -61,9 +55,6 @@ function randomNumber(min, max) {
   return Math.round(randomFloat * 10) / 10;
 }
   
-
-
-
 class Branch {
 
     constructor(begin, end, index) {
