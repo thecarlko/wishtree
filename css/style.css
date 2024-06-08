@@ -1,0 +1,196 @@
+
+
+body {
+    position: relative;
+}
+
+section#gui, section#wishes {
+    position: absolute;
+
+    width: 100vw;
+    height: 100vh;
+
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;    
+}
+
+
+section#wishes {
+    z-index: 10;
+}
+
+section#wishes p {
+    font-size: 0.8rem;
+    width: 2em;
+    height: 2em;
+    position: absolute; 
+    border-radius: 1rem;
+    text-align: center;
+
+    cursor: pointer;
+
+    /* background-color: var(--color-elevate); */
+    /* border: 1px solid var(--color-shade); */
+
+    background-image: url('./assets/leaf.svg');
+    background-repeat: no-repeat;
+    background-size: cover; 
+    padding: 0px;
+}
+
+
+section#gui {
+    z-index: 15;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    pointer-events: none;
+}
+
+section#gui div.container {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    padding: 2rem 1rem 1.5rem 1rem;
+}
+
+section#gui div.container > div.textfield {
+    pointer-events: all;
+    max-width: 720px;
+}
+
+/* #region Textfield */
+div.textfield {
+    position: relative;
+    flex-grow: 1;
+    width: 100%;
+    height: max-content;
+
+    margin-bottom: 0rem;
+
+    display: flex;
+    flex-direction: column;
+
+    transition-property: margin-bottom;
+    transition-timing-function: linear;
+    transition-duration: 150ms;
+}
+
+div.textfield input {
+
+    border-radius: 0.5rem; 
+    border: 1px solid whitesmoke;
+    background-color: FDE3F0;
+
+    width: 100%;
+    height: max-content;
+}
+
+div.textfield input::placeholder {
+    color: gray; 
+}
+
+div.textfield input:focus {
+    border: 0.8px solid goldenrod; 
+    outline: none;
+}
+
+div.textfield input[readonly] {
+    pointer-events: none;
+}
+
+div.textfield input[readonly]:focus {
+    border: 1px solid lightslategray;
+    outline: none;
+}
+
+div.textfield label#error {
+    opacity: 0%;
+
+    position: absolute;
+    bottom: -1.5rem;
+    left: 0rem;
+    right: 0px;
+
+    color: red;
+    font-size: 0.8rem;
+    margin: 0.1rem 0px;
+
+    transition-property: opacity;
+    transition-duration: 200ms;
+    transition-timing-function: linear;
+}
+
+div.textfield .error {
+    margin-bottom: 1.5rem;
+}
+
+div.textfield .error input {
+    border: 1px solid lightcoral;
+}
+
+div.textfield .error label#error {
+    opacity: 100%;
+}
+
+
+
+
+
+div.textfield div.marker, div.textfield div.action {
+    position: absolute;
+    left: 0px;
+    top: 1.5rem;
+    bottom: 0px;
+
+
+    fill: transparent;
+    stroke: lightgoldenrodyellow;
+
+    margin: 0.1rem 0.8rem 0px 0.8rem;
+}
+
+div.textfield div.marker > button, div.action > button {
+    width: 1.3rem !important;
+    height: 1.3rem !important;
+}
+
+div.textfield div.action {
+    right: 0px;
+    left: unset;
+
+    display: flex;
+    flex-direction: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+
+div.textfield div.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.textfield div.header label {
+    font-size: 0.8rem;
+    margin: 0.1rem 0px;
+}
+
+div.textfield div.header button {
+    padding: 0px 0px;
+    margin: 0px 0px;
+    width: max-content;
+    background-color: transparent;
+    color: lightgray;
+    font-size: 0.8rem;
+}
+/* #endregion */
+

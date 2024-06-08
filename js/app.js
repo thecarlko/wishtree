@@ -1,10 +1,44 @@
 
 
+window.onload = async () => {
+
+  const response = await fetch("https://wishtreeapi.netlify.app/api/wishtree", {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const data = await response.json();
+
+  console.log(data);
+}
 
 
 const backgroundColor = "#FDF3ED";
-const branchColor = "#A44753"
+const branchColor = "#9C7E6C";
 
+const wishesParent = document.getElementById("wishes");
+wishesParent.addEventListener(("click"), (event) => {
+
+  if (!event.target.classList.contains("flower")) { return; }
+
+  event.target.classList.add("fall");
+
+});
+
+/** @type { HTMLInputElement } */
+const scribe = document.getElementById("scribe");
+scribe.addEventListener(("keydown"), (event) => {
+  if (event.key !== "Enter") { return; }
+
+  const value = scribe.value;
+  console.log(value);
+
+  fetch("")
+
+  scribe.value = "";
+
+})
 
 
 let tree = [];
@@ -18,7 +52,6 @@ function setup() {
 
   tree[0] = root;
 
-
 }
 
 function draw() {
@@ -27,17 +60,16 @@ function draw() {
     for (let i = 0; i < tree.length; i++) {
       tree[i].show();
     }
-  
 }
 
-for (let index = 0; index < 6; index++) {
+for (let index = 0; index < 7; index++) {
     setTimeout(() => {
-        growTree();
+        growTree(index);
     }, 500 * index);
     
 }
 
-function growTree() {
+function growTree(index) {
 
     for (let i = tree.length - 1; i >= 0; i--) {
         if (!tree[i].finished) {
@@ -46,6 +78,27 @@ function growTree() {
         }
         tree[i].finished = true;
     }
+
+    if (index > 2) {
+        for (var i = 0; i < tree.length; i++) {
+            if (!tree[i].finished) {
+              let leaf = tree[i].end.copy();
+              leaves.push(leaf);
+            }
+        }
+    }
+
+    if (index == 6) {
+      const notes = leaves.map((leaf) => {
+        const randomAngle = Math.floor(Math.random() * 360);
+        return `<p class="flower" style="left: ${ leaf.x }px; top: ${ leaf.y }px; transform: translateX(-50%) translateY(-64%) rotate(${randomAngle}deg)"></p>`;
+
+      });
+      const markup = notes.join("");
+
+        wishesParent.innerHTML = markup;
+    }
+    
 }
 
 
