@@ -1,5 +1,9 @@
 
 
+
+let wishes = [];
+
+
 window.onload = async () => {
 
   const response = await fetch("https://wishtreeapi.netlify.app/api/wishtree", {
@@ -8,9 +12,7 @@ window.onload = async () => {
       'Content-Type': 'application/json',
     },
   });
-  const data = await response.json();
-
-  console.log(data);
+  wishes = await response.json();
 }
 
 
@@ -28,13 +30,19 @@ wishesParent.addEventListener(("click"), (event) => {
 
 /** @type { HTMLInputElement } */
 const scribe = document.getElementById("scribe");
-scribe.addEventListener(("keydown"), (event) => {
+scribe.addEventListener(("keydown"), async (event) => {
   if (event.key !== "Enter") { return; }
 
-  const value = scribe.value;
-  console.log(value);
+  await fetch("https://wishtreeapi.netlify.app/api/wishtree", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ message: scribe.value })
+  });
 
-  fetch("")
+  wishes.push({ id: "", message: scribe.value });
+  renderFlowers();
 
   scribe.value = "";
 
@@ -88,17 +96,21 @@ function growTree(index) {
         }
     }
 
-    if (index == 6) {
-      const notes = leaves.map((leaf) => {
-        const randomAngle = Math.floor(Math.random() * 360);
-        return `<p class="flower" style="left: ${ leaf.x }px; top: ${ leaf.y }px; transform: translateX(-50%) translateY(-64%) rotate(${randomAngle}deg)"></p>`;
-
-      });
-      const markup = notes.join("");
-
-        wishesParent.innerHTML = markup;
-    }
+    if (index == 6) { renderFlowers(); }
     
+}
+
+// Render notes after update 
+const renderFlowers = () => {
+  const notes = wishes.map((wish, index) => {
+    const leaf = leaves[index];
+    const randomAngle = Math.floor(Math.random() * 360);
+    return `<p class="flower" style="left: ${ leaf.x }px; top: ${ leaf.y }px; transform: translateX(-50%) translateY(-64%) rotate(${randomAngle}deg)"></p>`;
+
+  });
+
+  const markup = notes.join("");
+  wishesParent.innerHTML = markup;
 }
 
 
