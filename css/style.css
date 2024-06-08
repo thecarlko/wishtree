@@ -66,6 +66,10 @@ section#wishes p {
     padding: 0px;
 }
 
+section#wishes p:hover {
+    z-index: 50;
+}
+
 section#wishes p > span {
     display: none;
     
