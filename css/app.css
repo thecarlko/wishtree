@@ -102,6 +102,7 @@ p, input {
 
 a {
     color: var(--color-foreground);
+    cursor: pointer;
 }
 
 

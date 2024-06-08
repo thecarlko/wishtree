@@ -1,6 +1,8 @@
 
 
 
+const backgroundColor = "#FDF3ED";
+const branchColor = "#9C7E6C";
 let wishes = [];
 
 
@@ -16,8 +18,6 @@ window.onload = async () => {
 }
 
 
-const backgroundColor = "#FDF3ED";
-const branchColor = "#9C7E6C";
 
 const wishesParent = document.getElementById("wishes");
 wishesParent.addEventListener(("click"), (event) => {
@@ -25,6 +25,9 @@ wishesParent.addEventListener(("click"), (event) => {
   if (!event.target.classList.contains("flower")) { return; }
 
   event.target.classList.add("fall");
+
+
+
 
 });
 
@@ -46,6 +49,12 @@ scribe.addEventListener(("keydown"), async (event) => {
 
   scribe.value = "";
 
+});
+
+const gui = document.getElementById("gui");
+const infoButton = document.getElementById("info-icon");
+infoButton.addEventListener(("click"), () => {
+  gui.classList.toggle("show");
 })
 
 
@@ -104,8 +113,8 @@ function growTree(index) {
 const renderFlowers = () => {
   const notes = wishes.map((wish, index) => {
     const leaf = leaves[index];
-    const randomAngle = Math.floor(Math.random() * 360);
-    return `<p class="flower" style="left: ${ leaf.x }px; top: ${ leaf.y }px; transform: translateX(-50%) translateY(-64%) rotate(${randomAngle}deg)"></p>`;
+    const randomAngle = Math.floor(Math.random() * 81) - 40;
+    return `<p class="flower" style="left: ${ leaf.x }px; top: ${ leaf.y }px; transform: translateX(-50%) translateY(-64%) rotate(${randomAngle}deg)"><span>${ wish.message }<span></p>`;
 
   });
 
